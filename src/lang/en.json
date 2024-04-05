@@ -1,0 +1,13 @@
+{
+    "translation":{
+        "welcome":{
+            "heading": "Amazing taste of Coffee",
+            "intro": "Prepare to tantalize your taste buds with the amazing taste of coffee like never before",
+            "getStarted": "Get Started",
+            "skip": "Skip"
+        },
+        "home": {
+            "greeting": "Hello, Lucas Slavik"
+        }
+    }
+}
