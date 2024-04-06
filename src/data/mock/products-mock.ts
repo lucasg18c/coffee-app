@@ -4,7 +4,11 @@ export const featured: Product[] = [
   {
     id: 1,
     title: "Espresso Brown Coffee",
-    image: require("@assets/coffee_2.png"),
+    images: [
+      require("@assets/coffee_2.png"),
+      require("@assets/coffee_1.png"),
+      require("@assets/coffee_3.png"),
+    ],
     price: 5.99,
     description: "Complex flavor",
     rating: 4.5,
@@ -13,7 +17,7 @@ export const featured: Product[] = [
   {
     id: 2,
     title: "Espresso Brown Coffee",
-    image: require("@assets/coffee_3.png"),
+    images: [require("@assets/coffee_3.png")],
     price: 5.99,
     description: "Complex flavor",
     rating: 3.5,
@@ -22,7 +26,7 @@ export const featured: Product[] = [
   {
     id: 3,
     title: "Espresso Brown Coffee",
-    image: require("@assets/coffee_4.png"),
+    images: [require("@assets/coffee_4.png")],
     price: 5.99,
     description: "Complex flavor",
     rating: 4,

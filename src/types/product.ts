@@ -1,6 +1,6 @@
 export type Product = {
   id: number;
-  image: any;
+  images: any[];
   title: string;
   description?: string;
   price: number;

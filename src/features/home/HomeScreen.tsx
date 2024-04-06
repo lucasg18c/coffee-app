@@ -85,7 +85,7 @@ export default function HomeScreen() {
               }}
             >
               <Image
-                source={product.image}
+                source={product.images[0]}
                 style={{ width: 168, height: 122, resizeMode: "cover" }}
               />
               <View style={{ padding: 8 }}>
@@ -140,7 +140,7 @@ export default function HomeScreen() {
               }}
             >
               <Image
-                source={product.image}
+                source={product.images[0]}
                 style={{ height: 64, width: 64, borderRadius: 12 }}
               />
 

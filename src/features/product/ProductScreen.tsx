@@ -9,6 +9,7 @@ import { Image, TouchableOpacity, View } from "react-native";
 import { Colors } from "@/theme";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
+import PagerView from "react-native-pager-view";
 
 const formatter = Intl.NumberFormat("en", { notation: "compact" });
 
@@ -16,6 +17,11 @@ const coffeeSizes = [250, 350, 450];
 
 const MAX_AMOUNT = 5;
 const MIN_AMOUNT = 1;
+
+type PagerPosition = {
+  position: number;
+  offset: number;
+};
 
 export default function ProductScreen() {
   const { params } = useAppRoute<"Product">();
@@ -25,6 +31,11 @@ export default function ProductScreen() {
   const [product, setProduct] = useState<Product>();
   const [size, setSize] = useState(coffeeSizes[0]);
   const [amount, setAmount] = useState(1);
+
+  const [pagerPosition, setPagerPosition] = useState<PagerPosition>({
+    offset: 0,
+    position: 0,
+  });
 
   const bottomSheetRef = useRef<BottomSheet>(null);
 
@@ -67,10 +78,47 @@ export default function ProductScreen() {
       </TouchableOpacity>
       {!!product && (
         <>
-          <Image
-            source={product.image}
-            style={{ width: "100%", height: "50%" }}
-          />
+          <View style={{ height: "50%", position: "relative" }}>
+            <PagerView
+              onPageScroll={(e) => setPagerPosition(e.nativeEvent)}
+              initialPage={0}
+              style={{ flex: 1 }}
+            >
+              {product.images.map((image, key) => (
+                <View key={key}>
+                  <Image
+                    source={image}
+                    style={{ width: "100%", height: "100%" }}
+                  />
+                </View>
+              ))}
+            </PagerView>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 12,
+                position: "absolute",
+                bottom: 40,
+                start: 0,
+                end: 0,
+                // zIndex: 10,
+              }}
+            >
+              {product.images.map((_, key) => (
+                <View
+                  key={key}
+                  style={{
+                    width: key === pagerPosition.position ? 16 : 8,
+                    height: 8,
+                    borderRadius: 8,
+                    backgroundColor: colors.onSurface,
+                  }}
+                />
+              ))}
+            </View>
+          </View>
           <BottomSheet
             ref={bottomSheetRef}
             index={-1}
