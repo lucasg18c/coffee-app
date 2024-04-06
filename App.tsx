@@ -6,6 +6,7 @@ import {
 } from "react-native-paper";
 import { MD3Colors, ThemeProp } from "react-native-paper/lib/typescript/types";
 import "./src/lang/i18n";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const theme = {
   ...DefaultTheme,
@@ -18,15 +19,18 @@ const theme = {
     surfaceVariant: "#281205",
     onSurface: "#FFFFFF",
     surface: "#3D2C25",
+    primaryContainer: "#36251E",
   } as MD3Colors,
 } as ThemeProp;
 
 export default function App() {
   return (
-    <PaperProvider theme={theme}>
-      <NavigationContainer>
-        <Router />
-      </NavigationContainer>
-    </PaperProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <PaperProvider theme={theme}>
+        <NavigationContainer>
+          <Router />
+        </NavigationContainer>
+      </PaperProvider>
+    </GestureHandlerRootView>
   );
 }
