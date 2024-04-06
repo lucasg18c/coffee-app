@@ -14,17 +14,29 @@ const formatter = Intl.NumberFormat("en", { notation: "compact" });
 
 const coffeeSizes = [250, 350, 450];
 
+const MAX_AMOUNT = 5;
+const MIN_AMOUNT = 1;
+
 export default function ProductScreen() {
   const { params } = useAppRoute<"Product">();
   const { colors } = useTheme();
   const nav = useAppNavigation();
 
   const [product, setProduct] = useState<Product>();
+  const [size, setSize] = useState(coffeeSizes[0]);
+  const [amount, setAmount] = useState(1);
 
   const bottomSheetRef = useRef<BottomSheet>(null);
 
   async function fetchProduct(id: number) {
     setProduct(await productService.getProductById(id));
+  }
+
+  function addAmount(value: number) {
+    const res = amount + value;
+    if (MIN_AMOUNT <= res && res <= MAX_AMOUNT) {
+      setAmount(amount + value);
+    }
   }
 
   useEffect(() => {
@@ -106,34 +118,46 @@ export default function ProductScreen() {
                     gap: 12,
                   }}
                 >
-                  {coffeeSizes.map((size, key) => (
-                    <TouchableOpacity
-                      key={key}
-                      style={{
-                        flexDirection: "row",
-                        alignItems: "center",
-                        paddingHorizontal: 24,
-                        paddingVertical: 12,
-                        gap: 8,
-                        backgroundColor: Colors.chip,
-                        borderRadius: 8,
-                        marginTop: 8,
-                        flex: 1,
-                      }}
-                    >
-                      <MaterialCommunityIcons
-                        name="coffee-outline"
-                        size={20}
-                        color={colors.tertiary}
-                      />
-                      <Text
-                        variant="titleMedium"
-                        style={{ color: colors.tertiary, letterSpacing: 0.3 }}
+                  {coffeeSizes.map((_size, key) => {
+                    const isSelected = size === _size;
+
+                    return (
+                      <TouchableOpacity
+                        key={key}
+                        onPress={() => setSize(_size)}
+                        style={{
+                          flexDirection: "row",
+                          alignItems: "center",
+                          paddingHorizontal: 24,
+                          paddingVertical: 12,
+                          gap: 8,
+                          backgroundColor: Colors.chip,
+                          borderRadius: 8,
+                          marginTop: 8,
+                          flex: 1,
+                          borderWidth: isSelected ? 2 : undefined,
+                          borderColor: colors.primary,
+                        }}
                       >
-                        {size}
-                      </Text>
-                    </TouchableOpacity>
-                  ))}
+                        <MaterialCommunityIcons
+                          name="coffee-outline"
+                          size={20}
+                          color={isSelected ? colors.primary : colors.tertiary}
+                        />
+                        <Text
+                          variant="titleMedium"
+                          style={{
+                            color: isSelected
+                              ? colors.primary
+                              : colors.tertiary,
+                            letterSpacing: 0.3,
+                          }}
+                        >
+                          {_size}
+                        </Text>
+                      </TouchableOpacity>
+                    );
+                  })}
                 </View>
               </View>
 
@@ -153,8 +177,11 @@ export default function ProductScreen() {
                   }}
                 >
                   <TouchableOpacity
+                    onPress={() => addAmount(-1)}
                     style={{
-                      backgroundColor: Colors.chip,
+                      backgroundColor:
+                        amount === MIN_AMOUNT ? "#5A5A5A" : Colors.chip,
+
                       borderRadius: 50,
                       width: 32,
                       height: 32,
@@ -165,17 +192,23 @@ export default function ProductScreen() {
                     <MaterialCommunityIcons
                       name="minus-thick"
                       size={18}
-                      color={colors.onSurface}
+                      color={
+                        amount === MIN_AMOUNT
+                          ? colors.tertiary
+                          : colors.onSurface
+                      }
                     />
                   </TouchableOpacity>
 
                   <Text variant="bodyLarge" style={{ color: colors.onSurface }}>
-                    1
+                    {amount}
                   </Text>
 
                   <TouchableOpacity
+                    onPress={() => addAmount(1)}
                     style={{
-                      backgroundColor: Colors.chip,
+                      backgroundColor:
+                        amount === MAX_AMOUNT ? "#5A5A5A" : Colors.chip,
                       borderRadius: 50,
                       width: 32,
                       height: 32,
@@ -186,13 +219,17 @@ export default function ProductScreen() {
                     <MaterialCommunityIcons
                       name="plus"
                       size={18}
-                      color={colors.onSurface}
+                      color={
+                        amount === MAX_AMOUNT
+                          ? colors.tertiary
+                          : colors.onSurface
+                      }
                     />
                   </TouchableOpacity>
                 </View>
 
                 <Text variant="titleLarge" style={{ color: colors.onSurface }}>
-                  ${product.price}
+                  ${parseFloat((product.price * amount).toFixed(2))}
                 </Text>
               </View>
 
