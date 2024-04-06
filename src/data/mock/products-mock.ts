@@ -1,0 +1,81 @@
+import { Product } from "@/types";
+
+export const featured: Product[] = [
+  {
+    id: 1,
+    title: "Espresso Brown Coffee",
+    image: require("@assets/coffee_2.png"),
+    price: 5.99,
+    description: "Complex flavor",
+  },
+  {
+    id: 2,
+    title: "Espresso Brown Coffee",
+    image: require("@assets/coffee_3.png"),
+    price: 5.99,
+    description: "Complex flavor",
+  },
+  {
+    id: 3,
+    title: "Espresso Brown Coffee",
+    image: require("@assets/coffee_4.png"),
+    price: 5.99,
+    description: "Complex flavor",
+  },
+  {
+    id: 4,
+    title: "Espresso Brown Coffee",
+    image: require("@assets/coffee_2.png"),
+    price: 5.99,
+    description: "Complex flavor",
+  },
+  {
+    id: 5,
+    title: "Espresso Brown Coffee",
+    image: require("@assets/coffee_3.png"),
+    price: 5.99,
+    description: "Complex flavor",
+  },
+  {
+    id: 6,
+    title: "Espresso Brown Coffee",
+    image: require("@assets/coffee_4.png"),
+    price: 5.99,
+    description: "Complex flavor",
+  },
+  {
+    id: 7,
+    title: "Espresso Brown Coffee",
+    image: require("@assets/coffee_3.png"),
+    price: 5.99,
+    description: "Complex flavor",
+  },
+  {
+    id: 8,
+    title: "Espresso Brown Coffee",
+    image: require("@assets/coffee_4.png"),
+    price: 5.99,
+    description: "Complex flavor",
+  },
+  {
+    id: 9,
+    title: "Espresso Brown Coffee",
+    image: require("@assets/coffee_2.png"),
+    price: 5.99,
+    description: "Complex flavor",
+  },
+  {
+    id: 10,
+    title: "Espresso Brown Coffee",
+    image: require("@assets/coffee_3.png"),
+    price: 5.99,
+    description: "Complex flavor",
+  },
+  {
+    id: 11,
+    title: "Espresso Brown Coffee",
+    image: require("@assets/coffee_4.png"),
+    price: 5.99,
+    description: "Complex flavor",
+  },
+];

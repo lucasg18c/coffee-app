@@ -7,7 +7,7 @@ export interface PageProps {
   backgroundColor?: string;
 }
 
-export default function Page(props: PageProps) {
+export function Page(props: PageProps) {
   return (
     <SafeAreaView
       style={{ backgroundColor: props.backgroundColor, height: "100%" }}

@@ -1,18 +1,18 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Text, Image } from "react-native";
 import React from "react";
-import Page from "@/common/components/Page";
 import { LinearGradient } from "expo-linear-gradient";
-import { useNavigation } from "@react-navigation/native";
 import { Button, useTheme } from "react-native-paper";
 import { useTranslation } from "react-i18next";
+import { useAppNavigation } from "@/hooks";
+import { Page } from "@/common/components";
 
 export default function WelcomeScreen() {
   const { t } = useTranslation();
-  const nav = useNavigation();
+  const nav = useAppNavigation();
   const theme = useTheme();
 
   function handleGoHome() {
-    nav.navigate("Home" as never);
+    nav.navigate("Home");
   }
 
   return (

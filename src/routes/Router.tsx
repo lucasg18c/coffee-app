@@ -1,4 +1,3 @@
-import { View, Text } from "react-native";
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "@/features/home/HomeScreen";
@@ -7,8 +6,9 @@ import CheckoutScreen from "@/features/checkout/CheckoutScreen";
 import PopularScreen from "@/features/popular/PopularScreen";
 import ProductScreen from "@/features/product/ProductScreen";
 import WelcomeScreen from "@/features/welcome/WelcomeScreen";
+import { AppRoutesParamList } from "./routes";
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<AppRoutesParamList>();
 
 export default function Router() {
   return (

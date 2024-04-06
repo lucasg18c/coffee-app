@@ -1,89 +1,22 @@
-import { Image, ScrollView, View } from "react-native";
+import { Image, ScrollView, TouchableOpacity, View } from "react-native";
 import React from "react";
-import Page from "@/common/components/Page";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Text, useTheme } from "react-native-paper";
 import { useTranslation } from "react-i18next";
-
-export type Product = {
-  image: any;
-  title: string;
-  description?: string;
-  price: number;
-};
-
-const featured: Product[] = [
-  {
-    title: "Espresso Brown Coffee",
-    image: require("@assets/coffee_2.png"),
-    price: 5.99,
-    description: "Complex flavor",
-  },
-  {
-    title: "Espresso Brown Coffee",
-    image: require("@assets/coffee_3.png"),
-    price: 5.99,
-    description: "Complex flavor",
-  },
-  {
-    title: "Espresso Brown Coffee",
-    image: require("@assets/coffee_4.png"),
-    price: 5.99,
-    description: "Complex flavor",
-  },
-  {
-    title: "Espresso Brown Coffee",
-    image: require("@assets/coffee_2.png"),
-    price: 5.99,
-    description: "Complex flavor",
-  },
-  {
-    title: "Espresso Brown Coffee",
-    image: require("@assets/coffee_3.png"),
-    price: 5.99,
-    description: "Complex flavor",
-  },
-  {
-    title: "Espresso Brown Coffee",
-    image: require("@assets/coffee_4.png"),
-    price: 5.99,
-    description: "Complex flavor",
-  },
-  {
-    title: "Espresso Brown Coffee",
-    image: require("@assets/coffee_3.png"),
-    price: 5.99,
-    description: "Complex flavor",
-  },
-  {
-    title: "Espresso Brown Coffee",
-    image: require("@assets/coffee_4.png"),
-    price: 5.99,
-    description: "Complex flavor",
-  },
-  {
-    title: "Espresso Brown Coffee",
-    image: require("@assets/coffee_2.png"),
-    price: 5.99,
-    description: "Complex flavor",
-  },
-  {
-    title: "Espresso Brown Coffee",
-    image: require("@assets/coffee_3.png"),
-    price: 5.99,
-    description: "Complex flavor",
-  },
-  {
-    title: "Espresso Brown Coffee",
-    image: require("@assets/coffee_4.png"),
-    price: 5.99,
-    description: "Complex flavor",
-  },
-];
+import { featured } from "@/data/mock/products-mock";
+import { useAppNavigation } from "@/hooks";
+import { Product } from "@/types";
+import { Page } from "@/common/components";
 
 export default function HomeScreen() {
   const { t } = useTranslation();
   const theme = useTheme();
+  const nav = useAppNavigation();
+
+  function handlePressProduct(product: Product) {
+    nav.navigate("Product", { id: product.id });
+  }
+
   return (
     <Page backgroundColor="#47362F">
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -141,8 +74,9 @@ export default function HomeScreen() {
           }}
         >
           {featured.map((product, key) => (
-            <View
+            <TouchableOpacity
               key={key}
+              onPress={() => handlePressProduct(product)}
               style={{
                 backgroundColor: theme.colors.surface,
                 width: 168,
@@ -181,7 +115,7 @@ export default function HomeScreen() {
                   </View>
                 </View>
               </View>
-            </View>
+            </TouchableOpacity>
           ))}
         </ScrollView>
 
@@ -194,8 +128,9 @@ export default function HomeScreen() {
 
         <View style={{ paddingHorizontal: 16, gap: 16 }}>
           {featured.map((product, key) => (
-            <View
+            <TouchableOpacity
               key={key}
+              onPress={() => handlePressProduct(product)}
               style={{
                 flexDirection: "row",
                 backgroundColor: theme.colors.surface,
@@ -215,7 +150,7 @@ export default function HomeScreen() {
               </View>
 
               <Text variant="titleMedium">${product.price}</Text>
-            </View>
+            </TouchableOpacity>
           ))}
         </View>
       </ScrollView>
